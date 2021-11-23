@@ -28,17 +28,16 @@ export class LoginComponent implements OnInit {
     let email = this.loginForm.value['email'];
     let password = this.loginForm.value['password'];
     this.loginInfo = new LoginInfo(email, password);
-    console.log(this.loginInfo);
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
-        // this.tokenStorage.saveToken(data.accessToken);
-        // this.tokenStorage.saveEmail(data.email);
-        // this.tokenStorage.saveAuthorities(data.roles);
-        console.log(data);
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveRefreshToken(data.refreshToken);
+        this.tokenStorage.saveEmail(data.email);
+        this.tokenStorage.saveUserId(data.id);
+        this.tokenStorage.saveAuthorities(data.roles);
       },
       error => {
         console.log(error);
-
       }
 
     );
