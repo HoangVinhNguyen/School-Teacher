@@ -22,7 +22,7 @@ export class TokenStorageService {
         console.log(data['message']);
       },
       error => {
-
+        console.log(error);
       }
     );
     window.sessionStorage.clear();
@@ -34,7 +34,7 @@ export class TokenStorageService {
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(REFRESH_TOKEN_KEY)!;
+    return sessionStorage.getItem(TOKEN_KEY)!;
   }
 
   public saveRefreshToken(token: string) {
@@ -43,7 +43,7 @@ export class TokenStorageService {
   }
 
   public getRefreshToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY)!;
+    return sessionStorage.getItem(REFRESH_TOKEN_KEY)!;
   }
 
   public saveEmail(email: string) {

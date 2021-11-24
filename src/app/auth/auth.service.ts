@@ -25,6 +25,6 @@ export class AuthService {
   }
 
   logoutAccount(id: number): Observable<MessageResponse> {
-    return this.http.post<MessageResponse>(this.logoutUrl, new LogoutInfo(id));
+    return this.http.post<MessageResponse>(this.logoutUrl, new LogoutInfo(id), httpOptions);
   }
 }

@@ -1,1 +1,50 @@
-<p>teacher-manager works!</p>
+<div>
+  <h1>Classes Manage</h1>
+</div>
+
+<div class="row">
+  <div class="col-3 border bg-light">
+
+    <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+      <button *ngFor="let clazz of listClasses" (click)="showClass(clazz.id)"
+        class="nav-link" data-bs-toggle="pill" type="button" role="tab">
+        {{clazz.name}}
+      </button>
+    </div>
+
+  </div>
+  <div class="col-9 border">
+
+    <div *ngIf="contentClass" class="m-2">
+      <div class="w-25 mb-2">
+        <label for="course-name">Choose course</label>
+        <select class="form-control" name="course" id="course-name" [(ngModel)]="selectedCourse"
+          (ngModelChange)="selectedCourseChanged($event)">
+          <option *ngFor="let course of listCourses" [ngValue]="course">
+            {{course.name}}
+          </option>
+        </select>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>FullName</th>
+              <th>Point</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of contentClass.listStudents">
+              <td>{{student.id}}</td>
+              <td>{{student.email}}</td>
+              <td>{{student.fullName}}</td>
+              <td><input class="form-control" type="text" [value]="student.point"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

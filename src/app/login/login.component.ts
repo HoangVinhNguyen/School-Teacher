@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { LoginInfo } from '../auth/login-info';
 import { TokenStorageService } from '../auth/token-storage.service';
@@ -14,13 +15,16 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   private loginInfo!: LoginInfo;
 
-  constructor(private loginFormGr: FormBuilder, private authService: AuthService,
-    private tokenStorage: TokenStorageService) { }
+  constructor(
+    private loginFormGr: FormBuilder,
+    private authService: AuthService,
+    private tokenStorage: TokenStorageService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.loginFormGr.group({
-      email: "",
-      password: ""
+      email: "gv2@gmail.com",
+      password: "12345678"
     });
   }
 
@@ -35,6 +39,7 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveEmail(data.email);
         this.tokenStorage.saveUserId(data.id);
         this.tokenStorage.saveAuthorities(data.roles);
+        this.router.navigateByUrl("manager");
       },
       error => {
         console.log(error);

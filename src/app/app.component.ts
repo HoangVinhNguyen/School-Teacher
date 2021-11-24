@@ -12,7 +12,8 @@ export class AppComponent implements OnInit {
   roles!: string[];
   authority!: string;
 
-  constructor(private tokenStorageService: TokenStorageService) {
+  constructor(
+    private tokenStorageService: TokenStorageService) {
 
   }
 
