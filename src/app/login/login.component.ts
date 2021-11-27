@@ -39,7 +39,12 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveEmail(data.email);
         this.tokenStorage.saveUserId(data.id);
         this.tokenStorage.saveAuthorities(data.roles);
-        this.router.navigateByUrl("manager");
+        if (data.roles.includes('ROLE_STUDENT')) {
+          this.router.navigateByUrl("student");
+        }
+        if (data.roles.includes('ROLE_TEACHER')) {
+          this.router.navigateByUrl("manager");
+        }
       },
       error => {
         console.log(error);

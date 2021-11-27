@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { TeacherManagerComponent } from './teacher-manager/teacher-manager.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { StudentManagerComponent } from './student-manager/student-manager.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TopBarComponent } from './top-bar/top-bar.component';
     HomeComponent,
     TopBarComponent,
     FooterComponent,
-    TeacherManagerComponent
+    TeacherManagerComponent,
+    StudentManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'manager', component: TeacherManagerComponent },
+      { path: 'student', component: StudentManagerComponent },
     ]),
   ],
   providers: [
