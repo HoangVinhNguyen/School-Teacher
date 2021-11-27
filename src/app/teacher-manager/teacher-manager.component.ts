@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AcademicBodyReq } from '../modelDto/academic-body-req';
 import { AcademicModelDTO } from '../modelDto/academic-model-dto';
 import { ClazzModelDTO } from '../modelDto/clazz-model-dto';
 import { CourseModelDTO } from '../modelDto/course-model-dto';
+import { SavePointBodyReq } from '../modelDto/save-point-body-req';
 import { UserModelDTO } from '../modelDto/user-model-dto';
 import { TeacherManagerService } from './teacher-manager.service';
 
@@ -91,6 +92,26 @@ export class TeacherManagerComponent implements OnInit {
     if (this.classIdClicked > 0) {
       this.showClass(this.classIdClicked);
     }
+  }
+
+  savedPoint() {
+    let savePointBody = new SavePointBodyReq(this.profile,
+                                              this.contentClass,
+                                              this.selectedCourse,
+                                              this.contentClass.listStudents);
+    this.teacherManager.savePoint(savePointBody).subscribe(
+      data => {
+        this.listAcademic = data;
+          this.contentClass.listStudents.forEach(student => {
+            student.point = null;
+            this.listAcademic.filter(academic => academic.student.id === student.id)
+            .map(academic => student.point = academic.point)
+          });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

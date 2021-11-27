@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.loginFormGr.group({
-      email: "gv2@gmail.com",
-      password: "12345678"
+      email: "",
+      password: ""
     });
   }
 
