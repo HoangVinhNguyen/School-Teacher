@@ -11,6 +11,7 @@ import { LoginComponent } from '../login/login.component';
 export class TopBarComponent implements OnInit {
 
   @Input() isLogin!: boolean;
+  @Input() fullName!: string | null;
 
   constructor(
     private tokenStorageService: TokenStorageService,

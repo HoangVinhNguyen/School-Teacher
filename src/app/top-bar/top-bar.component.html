@@ -3,5 +3,6 @@
     <h1>THPT</h1>
   </a>
   <a *ngIf="isLogin" routerLink="login">Login</a>
-  <a (click)="logout()">Logout</a>
+  <p *ngIf="!isLogin" >Welcome, {{fullName}}</p>
+  <a *ngIf="!isLogin" (click)="logout()">Logout</a>
 </div>
