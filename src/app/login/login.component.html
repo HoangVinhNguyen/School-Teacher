@@ -1,8 +1,10 @@
-<h1>Login</h1>
-<div>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-    <input type="email" name="email" formControlName="email">
-    <input type="password" name="password" formControlName="password">
-    <button type="submit">Login</button>
+<div >
+  <form class="position-absolute top-50 start-50 translate-middle col-3" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+    <legend class="text-center">LOGIN</legend>
+    <label for="emailLogin" class="form-label">Email</label>
+    <input class="form-control" id="emailLogin" type="email" name="email" formControlName="email">
+    <label for="passwordLogin" class="form-label">Password</label>
+    <input class="form-control" id="passwordLogin" type="password" name="password" formControlName="password">
+    <button class="btn btn-primary mt-3 float-end" type="submit">Login</button>
   </form>
 </div>

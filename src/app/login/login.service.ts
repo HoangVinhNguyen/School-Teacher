@@ -15,7 +15,7 @@ export class LoginService {
 
   constructor(
     private authService: AuthService,
-    private tokenStorage: TokenStorageService,
+    private tokenStorageService: TokenStorageService,
     private router: Router
   ) { }
   setSubcribeUserId(value: number) {
@@ -28,11 +28,11 @@ export class LoginService {
   login(loginInfo: LoginInfo) {
     this.authService.attemptAuth(loginInfo).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveRefreshToken(data.refreshToken);
-        this.tokenStorage.saveEmail(data.email);
-        this.tokenStorage.saveUserId(data.id);
-        this.tokenStorage.saveAuthorities(data.roles);
+        this.tokenStorageService.saveToken(data.accessToken);
+        this.tokenStorageService.saveRefreshToken(data.refreshToken);
+        this.tokenStorageService.saveEmail(data.email);
+        this.tokenStorageService.saveUserId(data.id);
+        this.tokenStorageService.saveAuthorities(data.roles);
         if (data.roles.includes('ROLE_STUDENT')) {
           this.router.navigateByUrl("student");
         }
@@ -46,5 +46,11 @@ export class LoginService {
       }
 
     );
+  }
+
+  logout() {
+    this.tokenStorageService.logOut();
+    this.setSubcribeUserId(0);
+    this.router.navigateByUrl("");
   }
 }

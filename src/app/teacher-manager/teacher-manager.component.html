@@ -2,7 +2,7 @@
   <h1>Manage Class</h1>
 </div>
 
-<div class="row">
+<div class="row d-flex">
   <div class="col-3 border bg-light">
 
     <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
@@ -16,14 +16,19 @@
   <div class="col-9 border">
 
     <div *ngIf="contentClass" class="m-2">
-      <div class="w-25 mb-2">
-        <label for="course-name">Choose course</label>
-        <select class="form-control" name="course" id="course-name" [(ngModel)]="selectedCourse"
-          (ngModelChange)="selectedCourseChanged($event)">
-          <option *ngFor="let course of listCourses" [ngValue]="course">
-            {{course.name}}
-          </option>
-        </select>
+      <div class="d-flex flex-row m-3 align-items-end">
+        <div>
+          <label for="course-name">Choose course</label>
+          <select class="form-control" name="course" id="course-name" [(ngModel)]="selectedCourse"
+            (ngModelChange)="selectedCourseChanged($event)">
+            <option *ngFor="let course of listCourses" [ngValue]="course">
+              {{course.name}}
+            </option>
+          </select>
+        </div>
+        <div class="ms-2">
+          <button class="btn btn-primary align-items-end" (click)="savedPoint()">Save</button>
+        </div>
       </div>
       <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -44,8 +49,9 @@
             </tr>
           </tbody>
           <tfoot>
-            <tr>
-              <td colspan="4"><button class="btn btn-primary" (click)="savedPoint()">Save</button></td>
+            <tr class="table-info">
+              <td colspan="3">Number of student</td>
+              <td colspan="1"><b>{{contentClass.listStudents.length}}</b></td>
             </tr>
           </tfoot>
         </table>

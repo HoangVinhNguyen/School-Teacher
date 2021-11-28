@@ -1,8 +1,14 @@
 <div>
-  <a routerLink="/">
-    <h1>THPT</h1>
-  </a>
-  <a *ngIf="isLogin" routerLink="login">Login</a>
-  <p *ngIf="!isLogin" >Welcome, {{fullName}}</p>
-  <a *ngIf="!isLogin" (click)="logout()">Logout</a>
+  <nav class="navbar navbar-light" style="background-color: #db6930;">
+    <div class="container-fluid">
+      <a class="navbar-brand ms-5" routerLink="/">
+        <img id="img-logo"
+          src="https://www.westerncape.gov.za/sites/www.westerncape.gov.za/files/the_entrance_of_the_kranshoek_primary_school.jpg"
+          class="d-block w-100" alt="First">
+      </a>
+      <a class="navbar-brand me-5" *ngIf="isLogin" routerLink="login">Login</a>
+      <p *ngIf="!isLogin" class="me-5">Welcome, {{fullName}}</p>
+      <a class="navbar-brand me-5" *ngIf="!isLogin" (click)="logout()">Logout</a>
+    </div>
+  </nav>
 </div>
