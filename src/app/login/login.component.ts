@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { LoginInfo } from '../auth/login-info';
 import { TokenStorageService } from '../auth/token-storage.service';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginFormGr: FormBuilder,
-    private authService: AuthService,
-    private tokenStorage: TokenStorageService,
-    private router: Router) { }
+    private loginService: LoginService,
+    ) { }
 
   ngOnInit(): void {
     this.loginForm = this.loginFormGr.group({
@@ -32,25 +33,7 @@ export class LoginComponent implements OnInit {
     let email = this.loginForm.value['email'];
     let password = this.loginForm.value['password'];
     this.loginInfo = new LoginInfo(email, password);
-    this.authService.attemptAuth(this.loginInfo).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveRefreshToken(data.refreshToken);
-        this.tokenStorage.saveEmail(data.email);
-        this.tokenStorage.saveUserId(data.id);
-        this.tokenStorage.saveAuthorities(data.roles);
-        if (data.roles.includes('ROLE_STUDENT')) {
-          this.router.navigateByUrl("student");
-        }
-        if (data.roles.includes('ROLE_TEACHER')) {
-          this.router.navigateByUrl("manager");
-        }
-      },
-      error => {
-        console.log(error);
-      }
-
-    );
+    this.loginService.login(this.loginInfo);
   }
 
 }

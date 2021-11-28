@@ -1,5 +1,7 @@
-<a routerLink="/">
-  <h1>THPT</h1>
-</a>
-<a routerLink="login">Login</a>
-<a (click)="logout()">Logout</a>
+<div>
+  <a routerLink="/">
+    <h1>THPT</h1>
+  </a>
+  <a *ngIf="isLogin" routerLink="login">Login</a>
+  <a (click)="logout()">Logout</a>
+</div>
