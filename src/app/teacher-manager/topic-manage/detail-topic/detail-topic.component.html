@@ -1,0 +1,67 @@
+<div>
+  <div class="row">
+    <h1>Topic Manage</h1>
+    <button [routerLink]="['/topic-manage']"><</button>
+  </div>
+  <div class="row">
+    <ng-container  *ngIf="topic" >
+      <div *ngFor="let srcImg of JSON.parse(topic.content)" >
+        <img [src]="srcImg">
+      </div>
+    </ng-container>
+  </div>
+  <div class="row">
+    <h2>Comment</h2>
+    <div class="row">
+      <label for="input-comment">Your comment</label>
+      <input id="input-comment" name="input-comment" type="text" [(ngModel)]="comment"/>
+      <button class="btn btn-primary" (click)="upComment()">Up</button>
+    </div>
+    <ng-container *ngIf="listComment.length > 0">
+      <div class="row" *ngFor="let comment of listComment; let index = index;">
+        <label *ngIf="comment.user.id == getUserId()" class="text-success" for="input-comment">Your Comment</label>
+        <label *ngIf="comment.user.id != getUserId()" class="text-primary" for="input-comment">{{comment.user.fullName}}</label>
+        <input id="input-comment" name="input-comment" type="text" [value]="comment.content" readonly/>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row d-flex">
+    <div class="col-2 border bg-light">
+
+      <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+        <button *ngFor="let student of listStudents; let index = index;" class="nav-link" data-bs-toggle="pill"
+          type="button" role="tab" (click)="openDetail(student)">
+          {{student.id}} - {{student.fullName}}
+        </button>
+      </div>
+
+    </div>
+    <div class="col-10 border">
+      <ng-container *ngIf="isGetAnswer">
+        <div class="row">
+          <h2>Student Answer Topic</h2>
+          <div class="col horizontal-scrollable">
+            <div id="list-topic-answer" class="row scrolling-row">
+                <div class="col-md-3 scrolling-col" *ngFor="let srcImg of srcImgArray; let index = index;">
+                  <app-item-detail-course [srcImg] = "srcImg"></app-item-detail-course>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label for="point-input">Point</label>
+            <input type="text" id="point-input" name="point-input" [(ngModel)]="point" />
+            <button class="btn btn-primary" (click)="savePoint()">Save Point</button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isNotAnswer">
+          <div class="row">
+            <h2 class="text-danger">Student Not Answer Topic</h2>
+            </div>
+        </ng-container>
+    </div>
+  </div>
+
+</div>
+
+

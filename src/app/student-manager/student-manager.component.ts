@@ -8,33 +8,46 @@ import { StudentManagerService } from './student-manager.service';
   templateUrl: './student-manager.component.html',
   styleUrls: ['./student-manager.component.css']
 })
+
 export class StudentManagerComponent implements OnInit {
 
-  listAcademic!: AcademicModelDTO[];
-  profile!: UserModelDTO;
-  average: number = 0;
-  constructor(
-    private studentService: StudentManagerService,
-  ) { }
+  private _listAcademic!: AcademicModelDTO[];
+  private _profile!: UserModelDTO;
 
-  ngOnInit(): void {
+  constructor(
+    private _studentService: StudentManagerService,
+  ) {
     this.getAcademicTranscript();
   }
 
+  ngOnInit(): void {
+  }
+
+  public get listAcademic(): AcademicModelDTO[] {
+    return this._listAcademic;
+  }
+  public set listAcademic(value: AcademicModelDTO[]) {
+    this._listAcademic = value;
+  }
+  public get profile(): UserModelDTO {
+    return this._profile;
+  }
+  public set profile(value: UserModelDTO) {
+    this._profile = value;
+  }
+
+  async getAcademicTranscriptSync() {
+    let id = this._studentService.getStudentId();
+    let data = await this._studentService.getAcademic(id).toPromise();
+    return data;
+  }
+
   getAcademicTranscript() {
-    let id = this.studentService.getStudentId();
-    this.studentService.getAcademic(id).subscribe(
+    let id = this._studentService.getStudentId();
+    this._studentService.getAcademic(id).subscribe(
       data => {
-        let countCourse = data.length;
-        let averagePoint = 0;
-        this.average = data.forEach((e: AcademicModelDTO) => {
-          averagePoint += e.point;
-        });
-        this.average = averagePoint;
-        this.average = this.average / countCourse;
-        this.listAcademic = data;
-        this.profile = data[0].student;
-        console.log(this.listAcademic);
+        this._listAcademic = data;
+        this._profile = this._listAcademic[0].student;
       },
       error => {
         console.log(error);

@@ -1,7 +1,6 @@
-import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterContentInit, Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TokenStorageService } from './auth/token-storage.service';
-import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { UserModelDTO } from './modelDto/user-model-dto';
 import { UserService } from './services/user.service';
@@ -11,7 +10,7 @@ import { UserService } from './services/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, AfterContentInit, OnDestroy {
 
   title = 'School Teacher Manager';
   private roles!: string[];
@@ -32,16 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
       id => {
         this.IsLogin = id !== 0 ? false : true;
         if (this.IsLogin == false) {
-          this.userService.getUserInfo(id).subscribe(
-            data => {
-              this.userInfo = data;
-              this.FullName = this.userInfo.fullName;
-            }, error => {
-              console.log(error);
-            }
-          );
+          this.getUserInfo(id);
         }
-
       }
     );
     if (this.tokenStorageService.getToken()) {
@@ -60,7 +51,25 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterContentInit() {
+    if (this.tokenStorageService.getUserId()) {
+      this.getUserInfo(this.tokenStorageService.getUserId());
+      this.IsLogin = Number(this.tokenStorageService.getUserId()) !== 0 ? false : true;
+    }
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  getUserInfo(id :number): void {
+    this.userService.getUserInfo(id).subscribe(
+      data => {
+        this.userInfo = data;
+        this.FullName = this.userInfo.fullName;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 }

@@ -1,61 +1,8 @@
 <div>
-  <h1>Manage Class</h1>
-</div>
-
-<div class="row d-flex">
-  <div class="col-3 border bg-light">
-
-    <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-      <button *ngFor="let clazz of listClasses" (click)="showClass(clazz.id)"
-        class="nav-link" data-bs-toggle="pill" type="button" role="tab">
-        {{clazz.name}}
-      </button>
-    </div>
-
-  </div>
-  <div class="col-9 border">
-
-    <div *ngIf="contentClass" class="m-2">
-      <div class="d-flex flex-row m-3 align-items-end">
-        <div>
-          <label for="course-name">Choose course</label>
-          <select class="form-control" name="course" id="course-name" [(ngModel)]="selectedCourse"
-            (ngModelChange)="selectedCourseChanged($event)">
-            <option *ngFor="let course of listCourses" [ngValue]="course">
-              {{course.name}}
-            </option>
-          </select>
-        </div>
-        <div class="ms-2">
-          <button class="btn btn-primary align-items-end" (click)="savedPoint()">Save</button>
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-striped table-hover">
-          <thead class="table-light">
-            <tr>
-              <th>ID</th>
-              <th>Email</th>
-              <th>FullName</th>
-              <th>Point</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let student of contentClass.listStudents">
-              <td>{{student.id}}</td>
-              <td>{{student.email}}</td>
-              <td>{{student.fullName}}</td>
-              <td><input class="form-control" type="number" [(ngModel)]="student.point"></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr class="table-info">
-              <td colspan="3">Number of student</td>
-              <td colspan="1"><b>{{contentClass.listStudents.length}}</b></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
+  <div class="row flow-offset-1">
+    <app-item-manage class="col-xs-6 col-md-4"
+    [courseName]="'Point-Manage'" [link]="'/point-manage'"></app-item-manage>
+    <app-item-manage class="col-xs-6 col-md-4"
+    [courseName]="'Topic-Manage'" [link]="'/topic-manage'"></app-item-manage>
   </div>
 </div>

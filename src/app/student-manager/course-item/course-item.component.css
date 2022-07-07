@@ -1,0 +1,206 @@
+/*
+* @subsection Shop
+*/
+.course {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.course .caption {
+  margin-top: 15px;
+}
+
+.course .caption h6 {
+  color: #455a64;
+}
+
+.course .caption a {
+  text-decoration: none;
+}
+
+.course .caption .course-info + .course-info {
+  margin-left: 15px;
+}
+
+.course.tumbnail {
+  box-shadow: 0 5px 25px 0 transparent;
+  transition: 0.3s linear;
+  padding-top: 0;
+}
+
+.course.tumbnail img:hover {
+  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.2);
+}
+
+.course .contentBox {
+  position: relative;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.course-info {
+  display: inline-block;
+  font-size: 15px;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: 0.02em;
+  color: #2b2f3e;
+}
+
+.course-info.title-name {
+  color: #3f65f0;
+}
+
+/*>8.0*/
+.course-info.point.excellent {
+  font-weight: 700;
+  color: #49c52e;
+}
+/*7.0>=<8.0*/
+.course-info.point.good {
+  font-weight: 700;
+  color: #2e5ec5;
+}
+/*5.0><7.0*/
+.course-info.point.average {
+  font-weight: 700;
+  color: #e2e82e;
+}
+/*<=5.0*/
+.course-info.point.below-average {
+  font-weight: 700;
+  color: #f18547;
+}
+
+.course-info.level.excellent {
+  font-weight: 700;
+  color: #49c52e;
+}
+.course-info.level.good {
+  font-weight: 700;
+  color: #2e5ec5;
+}
+.course-info.level.average {
+  font-weight: 700;
+  color: #e2e82e;
+}
+.course-info.level.below-average {
+  font-weight: 700;
+  color: #f18547;
+}
+
+.course-info.homework-done {
+  font-weight: 700;
+  color: #49c52e;
+}
+.course-info.homework-process {
+  font-weight: 700;
+  color: #e75854;
+}
+
+.price.sale {
+  color: #e75854;
+}
+
+.price del {
+  color: #b0bec5;
+}
+
+
+
+.card {
+  position: relative;
+  width: 320px;
+  height: auto;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+
+.card .imgBox {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  z-index: 1;
+}
+/*
+.card .imgBox img {
+    max-width: 100%;
+
+    transition: .5s;
+}
+
+.card:hover .imgBox img {
+    max-width: 50%;
+
+}
+*/
+.card .contentBox {
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .contentBox h3 {
+  font-size: 18px;
+  color: black;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .contentBox .info {
+  justify-content: left;
+  align-items: left;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.card .contentBox .price {
+  font-size: 24px;
+  color: black;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.card .contentBox .info p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.card .contentBox .buy {
+  position: flex;
+  top: 100px;
+  opacity: 1;
+  padding: 10px 30px;
+  margin-top: 15px;
+  color: #000000;
+  text-decoration: none;
+  background: #ffce00;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.1s;
+}
+
+.card:hover .contentBox .buy {
+  top: 0;
+  opacity: 0.8;
+  background: #e2b501;
+}

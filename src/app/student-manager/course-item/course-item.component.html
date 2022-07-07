@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="contentBox">
+    <h3>{{courseInfo.course.name}}</h3>
+    <div *ngIf="courseInfo!=null" class="info">
+      <p>Class Name: <span class="course-info title-name">{{courseInfo.clazz.name}}</span></p>
+      <p>Teacher: <span class="course-info title-name">{{courseInfo.teacher.fullName}}</span></p>
+
+      <p>Current Average Point:
+        <span *ngIf="getAverage(courseInfo.listPoint)<=5" class="course-info point below-average">{{getAverage(courseInfo.listPoint)}}</span>
+        <span *ngIf="getAverage(courseInfo.listPoint)>5&&getAverage(courseInfo.listPoint)<6"
+          class="course-info point average">{{getAverage(courseInfo.listPoint)}}</span>
+        <span *ngIf="getAverage(courseInfo.listPoint)>=6&&getAverage(courseInfo.listPoint)<8" class="course-info point good">{{getAverage(courseInfo.listPoint)}}</span>
+        <span *ngIf="getAverage(courseInfo.listPoint)>=8" class="course-info point excellent">{{getAverage(courseInfo.listPoint)}}</span>
+      </p>
+      <p>Current Average Level:
+        <span *ngIf="getAverage(courseInfo.listPoint)<=5" class="course-info level below-average">Below Average</span>
+        <span *ngIf="getAverage(courseInfo.listPoint)>5&&getAverage(courseInfo.listPoint)<6" class="course-info level average">Average</span>
+        <span *ngIf="getAverage(courseInfo.listPoint)>=6&&getAverage(courseInfo.listPoint)<8" class="course-info level good">Good</span>
+        <span *ngIf="getAverage(courseInfo.listPoint)>=8" class="course-info level excellent">Excellent</span>
+      </p>
+    </div>
+    <a [routerLink]="['/detail-course', courseInfo.course.id, courseInfo.clazz.id]" class="buy">Detail</a>
+  </div>
+</div>

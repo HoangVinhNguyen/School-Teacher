@@ -1,13 +1,13 @@
 
 footer {
-  position: fixed;
+  position: auto;
   height: 100px;
   bottom: 0;
   width: 100%;
 }
 
 #copyright {
-  position: absolute;
+  position: auto;
   width: 100%;
   bottom: 0;
 }

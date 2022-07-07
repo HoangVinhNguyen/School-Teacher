@@ -4,17 +4,17 @@ import { UserModelDTO } from "./user-model-dto";
 
 export class StudentPointBodyReq {
   constructor(
-    private student: UserModelDTO,
-    private point: number
+    public student: UserModelDTO,
+    public point: number
   ) {}
 }
 
 export class SavePointBodyReq {
 
   constructor(
-    private teacher: UserModelDTO,
-    private clazz: ClazzModelDTO,
-    private course: CourseModelDTO,
-    private listStudents: UserModelDTO[]
+    public teacher: UserModelDTO,
+    public clazz: ClazzModelDTO,
+    public course: CourseModelDTO,
+    public listStudents: UserModelDTO[]
   ) {}
 }

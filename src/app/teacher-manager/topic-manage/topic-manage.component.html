@@ -1,0 +1,91 @@
+<div>
+  <div class="row">
+    <h1>Topic Manage</h1>
+    <button [routerLink]="['/teacher']"><</button>
+  </div>
+  <div class="row scrolling-row">
+    <div id="{{index}}" class="col-md-3 scrolling-col" *ngFor="let topic of listTestOfTeacher; let index = index;">
+      <app-item-topic id="{{topic.id}}" [topic]="topic"></app-item-topic>
+      <a [routerLink]="['/detail-topic', topic.id]" class="btn btn-info">Get Topic</a>
+    </div>
+  </div>
+
+  <div class="col horizontal-scrollable">
+    <button class="btn btn-primary" (click)="createNewImageTopic()">Add Image Topic</button>
+    <div id="list-topic" class="row scrolling-row">
+      <div id="{{index}}" class="col-md-3 scrolling-col" *ngFor="let i of colTopic; let index = index;">
+        <app-item-topic-image></app-item-topic-image>
+        <button (click)="removeTopic(index)">Remove</button>
+      </div>
+    </div>
+    <div class="row">
+      <label for="code-topic">Code Topic</label>
+      <input id="code-topic" name="code-topic" [(ngModel)]="codeTopic" />
+      <!-- <label for="number-answer">Number Answer</label>
+      <input id="number-answer" name="number-answer" [(ngModel)]="numberAnswer" /> -->
+      <label for="coefficient">Number Answer</label>
+      <input id="coefficient" name="coefficient" [(ngModel)]="coefficient" />
+      <label for="course-name">Assign For Class</label>
+      <select class="form-control" name="class-name" id="class-name" [(ngModel)]="selectedClass">
+        <option *ngFor="let clazz of listClasses" [ngValue]="clazz">
+          {{clazz.name}}
+        </option>
+      </select>
+      <label for="course-name">Choose course</label>
+      <select class="form-control" name="course" id="course-name" [(ngModel)]="selectedCourse">
+        <option *ngFor="let course of listCourses" [ngValue]="course">
+          {{course.name}}
+        </option>
+      </select>
+    </div>
+    <!-- <div id="table-answer" class="row">
+      <div class="table">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Ordinal Number Answer</th>
+              <th>Answer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let i of rowAnswer; let index = index;">
+              <tr>
+                <td>{{index+1}}</td>
+                <td>
+                  <input type="checkbox" class="btn-check" id="answer{{index+1}}A" name="answer{{index+1}}A">
+                  <label class="btn btn-outline-primary" for="answer{{index+1}}A">A</label>
+
+                  <input type="checkbox" class="btn-check" id="answer{{index+1}}B" name="answer{{index+1}}B"
+                    autocomplete="off">
+                  <label class="btn btn-outline-primary" for="answer{{index+1}}B">B</label>
+
+                  <input type="checkbox" class="btn-check" id="answer{{index+1}}C" name="answer{{index+1}}C"
+                    autocomplete="off">
+                  <label class="btn btn-outline-primary" for="answer{{index+1}}C">C</label>
+
+                  <input type="checkbox" class="btn-check" id="answer{{index+1}}D" name="answer{{index+1}}D"
+                    autocomplete="off">
+                  <label class="btn btn-outline-primary" for="answer{{index+1}}D">D</label>
+
+                  <input type="checkbox" class="btn-check" id="answer{{index+1}}E" name="answer{{index+1}}E"
+                    autocomplete="off">
+                  <label class="btn btn-outline-primary" for="answer{{index+1}}E">E</label>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+          <tfoot>
+            <tr class="table-info">
+              <td colspan="2">
+                <p><b>Total: </b>{{rowAnswer.length}}</p>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div> -->
+    <div class="row">
+      <button class="btn btn-success" (click)="submitTest()">Submit</button>
+    </div>
+  </div>
+</div>

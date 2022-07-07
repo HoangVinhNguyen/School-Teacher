@@ -1,25 +1,26 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { AcademicBodyReq } from '../modelDto/academic-body-req';
-import { AcademicModelDTO } from '../modelDto/academic-model-dto';
-import { ClazzModelDTO } from '../modelDto/clazz-model-dto';
-import { CourseModelDTO } from '../modelDto/course-model-dto';
-import { SavePointBodyReq } from '../modelDto/save-point-body-req';
-import { UserModelDTO } from '../modelDto/user-model-dto';
-import { TeacherManagerService } from './teacher-manager.service';
+import { Component, OnInit } from '@angular/core';
+import { AcademicBodyReq } from 'src/app/modelDto/academic-body-req';
+import { AcademicModelDTO } from 'src/app/modelDto/academic-model-dto';
+import { ClazzModelDTO } from 'src/app/modelDto/clazz-model-dto';
+import { CourseModelDTO } from 'src/app/modelDto/course-model-dto';
+import { Point } from 'src/app/modelDto/point-model';
+import { SavePointBodyReq } from 'src/app/modelDto/save-point-body-req';
+import { UserModelDTO } from 'src/app/modelDto/user-model-dto';
+import { TeacherManagerService } from '../teacher-manager.service';
 
 @Component({
-  selector: 'app-teacher-manager',
-  templateUrl: './teacher-manager.component.html',
-  styleUrls: ['./teacher-manager.component.css']
+  selector: 'app-point-manage',
+  templateUrl: './point-manage.component.html',
+  styleUrls: ['./point-manage.component.css']
 })
-export class TeacherManagerComponent implements OnInit, AfterViewInit {
+export class PointManageComponent implements OnInit {
 
   listClasses!: ClazzModelDTO[];
   listCourses!: CourseModelDTO[];
   contentClass!: ClazzModelDTO;
   selectedCourse!: CourseModelDTO;
   private profile!: UserModelDTO
-  private listAcademic!: AcademicModelDTO[];
+  listAcademic!: AcademicModelDTO[];
   private classIdClicked!: number;
 
   constructor(
@@ -30,10 +31,6 @@ export class TeacherManagerComponent implements OnInit, AfterViewInit {
     this.getClasses();
     this.getCourses();
     this.getProfile();
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   getDate(date: Date): string {
@@ -61,7 +58,9 @@ export class TeacherManagerComponent implements OnInit, AfterViewInit {
           this.listAcademic = data;
           this.contentClass.listStudents.forEach(student => {
             this.listAcademic.filter(academic => academic.student.id === student.id)
-            .map(academic => student.listPoint = academic.listPoint);
+            .map(academic => {
+              student.listPoint = academic.listPoint;
+            });
           });
         },
         error => {
@@ -106,18 +105,17 @@ export class TeacherManagerComponent implements OnInit, AfterViewInit {
                                               this.contentClass,
                                               this.selectedCourse,
                                               this.contentClass.listStudents);
+
     this.teacherManager.savePoint(savePointBody).subscribe(
       data => {
-        this.listAcademic = data;
-        this.contentClass.listStudents.forEach(student => {
-          this.listAcademic.filter(academic => academic.student.id === student.id)
-          .map(academic => student.listPoint = academic.listPoint);
-        });
+        this.showClass(this.classIdClicked);
+
       },
       error => {
         console.log(error);
       }
     );
+
   }
 
 }

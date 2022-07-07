@@ -1,0 +1,8 @@
+<div class="card">
+  <div class="contentBox">
+    <h3>{{nameTopic}}</h3>
+    <label for="myfile">Select a file:</label>
+    <input type="file" id="myfile" name="myfile" accept=".png,.jpeg,.jpg,.mp4" (change)="onFileChanged($event)">
+    <img [src]="selectedFile" class="imgBox" *ngIf="selectedFile" />
+  </div>
+</div>

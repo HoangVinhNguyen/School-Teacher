@@ -37,7 +37,7 @@ export class LoginService {
           this.router.navigateByUrl("student");
         }
         if (data.roles.includes('ROLE_TEACHER')) {
-          this.router.navigateByUrl("manager");
+          this.router.navigateByUrl("teacher");
         }
         this.setSubcribeUserId(data.id);
       },
